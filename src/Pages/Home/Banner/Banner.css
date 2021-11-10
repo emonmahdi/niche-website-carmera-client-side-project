@@ -1,0 +1,16 @@
+#banner-area{
+    background-color: rgba(161, 116, 138, 0.49);
+    height:90vh;
+}
+.hero-area{
+    padding-top: 200px;
+}
+.banner-area{
+    
+}
+.banner-img{
+    padding-top: 100px;
+}
+.banner-img img{
+    width: 80%;
+}
