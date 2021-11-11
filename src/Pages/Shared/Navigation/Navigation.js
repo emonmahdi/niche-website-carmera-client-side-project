@@ -13,6 +13,8 @@ const Navigation = () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ms-auto">
+                        <Nav.Link as={Link} to="/home">Home</Nav.Link>
+                        <Nav.Link  to="/home#products">Services</Nav.Link>
                         <Nav.Link href="#features">Features</Nav.Link>
                         <Nav.Link href="#pricing">Pricing</Nav.Link>
                         {user?.email?

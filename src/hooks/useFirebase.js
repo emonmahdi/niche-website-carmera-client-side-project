@@ -1,6 +1,7 @@
 import initializeAuthentication from "../Pages/Login/Firebase/firebase.init"
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, createUserWithEmailAndPassword,signInWithEmailAndPassword, updateProfile  } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { useHistory, useLocation } from "react-router";
 initializeAuthentication();
  
 const useFirebase = () => {
@@ -9,7 +10,7 @@ const useFirebase = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true) 
 
     const googleProvider = new GoogleAuthProvider();
     const auth = getAuth(); 
@@ -47,39 +48,46 @@ const useFirebase = () => {
 
     // email password authentication
 
-    const handleRegistration = (e) => {
-        e.preventDefault();
+    const handleRegistration = (history) => {
+        // e.preventDefault();
         console.log(email, password);
         if(password.length < 6){
             setError('Password must be at least 6 Charecters Long')
             return;
         }
-        createUserWithEmailAndPassword(auth, email, password,name)
-            .then(result => {
-                const user = result.user 
-                console.log(user);
-                setError('');
-                setUserName('');
-                reload();
-            })
-            .catch(error => {
-                setError(error.message);
-            })
+      return  createUserWithEmailAndPassword(auth, email, password,name)
+            // .then(result => {
+            //     const user = result.user 
+            //     const newUser = {email, displayName:name}
+            //     console.log(newUser);
+            //     setUser(newUser)
+            //     // send name to firebase after creation
+
+            //     history.push('/')
+            //     setError('');
+            //     setUserName('');
+            //     reload();
+            // })
+            // .catch(error => {
+            //     setError(error.message);
+            // })
     }
 
     // handle signIn 
 
     const handleLogin = (e) => {
         console.log(email, password)
-        e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password, name)
-            .then(result => {
-                const user = result.user
-                console.log(user)
-            })
-            .catch(error => {
-                setError(error.message)
-            })
+        // e.preventDefault();
+      return  signInWithEmailAndPassword(auth, email, password, name)
+            // .then(result => {
+            //     const user = result.user
+            //     console.log(user) 
+            //     setError('')
+            // })
+            // .catch(error => {
+            //     setError(error.message)
+            // })
+            e.preventDefault();
     }
      const reload = () => {
          window.location.reload();

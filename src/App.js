@@ -6,6 +6,8 @@ import Home from './Pages/Home/Home/Home';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Login/Register/Register';
 import AuthProvider from './contexts/AuthProvider';
+import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
+import ServiceDetails from './Pages/ServiceDetails/ServiceDetails';
 
 function App() {
   return (
@@ -25,6 +27,9 @@ function App() {
             <Route exact path="/register">
                 <Register></Register>
             </Route>
+            <PrivateRoute path='/product/:Id'>
+                <ServiceDetails></ServiceDetails>
+            </PrivateRoute>
           </Switch>
        </Router>
       </AuthProvider>
