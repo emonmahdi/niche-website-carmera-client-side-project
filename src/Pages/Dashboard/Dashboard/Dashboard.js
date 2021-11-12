@@ -20,8 +20,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
-    useParams,
+    Link, 
     useRouteMatch
   } from "react-router-dom";
 import DashboardHome from '../DashboardHome/DashboardHome';
@@ -40,6 +39,7 @@ function Dashboard(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const {user, logOut} = useAuth();
+  const {admin} = useAuth();
 
 
   let { path, url } = useRouteMatch();
@@ -55,28 +55,47 @@ function Dashboard(props) {
       <Link to='/home'>
             <Button variant="contained" color="inherit">Home</Button>
         </Link> <br /> <br />
-      <Link to='/dashboard'>
+        
+        {/* ======Normal User===== */}
+        {!admin && <Box>
+
+          <Link to='/dashboard'>
             <Button variant="contained" color="inherit">Dashboard</Button>
         </Link> <br /> <br />
+
+        <Link to={`${url}/payment`}>
+            <Button variant="contained" color="inherit">Payment</Button>
+        </Link> <br /> <br />
+
+        <Link to={`${url}/myorder`}>
+            <Button variant="contained" color="inherit">My Orders</Button>
+        </Link> <br /> <br />
+
+        <Link to={`${url}/review`}>
+            <Button variant="contained" color="inherit">Review</Button>
+        </Link> <br /> <br /> 
+
+        </Box>
+        
+        }
+      
+        {/* ======Admin User===== */}
+    {admin && <Box>
+
       <Link to={`${url}/makeAdmin`}>
             <Button variant="contained" color="inherit">makeAdmin</Button>
         </Link> <br /> <br />
       <Link to={`${url}/addProduct`}>
             <Button variant="contained" color="inherit">Add Product</Button>
         </Link> <br /> <br />
-        {/* ======Normal User===== */}
-      <Link to={`${url}/payment`}>
-            <Button variant="contained" color="inherit">Payment</Button>
-        </Link> <br /> <br />
-      <Link to={`${url}/managorders`}>
+        <Link to={`${url}/managorders`}>
             <Button variant="contained" color="inherit">Manage Orders</Button>
         </Link> <br /> <br />
-      <Link to={`${url}/myorder`}>
-            <Button variant="contained" color="inherit">My Orders</Button>
-        </Link> <br /> <br />
-      <Link to={`${url}/review`}>
-            <Button variant="contained" color="inherit">Review</Button>
-        </Link> <br /> <br />  
+      
+      </Box>}
+      
+ 
+       
         <Divider /><br /> 
         <Button onClick={logOut} style={{textDecoration:'none',color:'#000',marginLeft:'10px'}} variant="contained" color="inherit">Log Out</Button>
       </List>

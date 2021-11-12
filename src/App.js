@@ -24,10 +24,7 @@ function App() {
             </Route>
             <Route exact path="/login">
                <Login></Login>
-            </Route>
-            <Route exact path="/manageorders">
-               <MangeOrders></MangeOrders>
-            </Route>
+            </Route> 
             <Route exact path="/register">
                 <Register></Register>
             </Route>
