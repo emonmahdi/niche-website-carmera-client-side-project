@@ -33,7 +33,12 @@ const Register = () => {
         <Box>
         <Navigation></Navigation>  
         <Container>
+        <h2 className='text-info text-warning mt-3'>Please Register Here</h2>
         <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+                 <img src={regImg} style={{width:'90%'}} alt="" />
+            </Grid> 
+            {/* ======================== */}
             <Grid item xs={12} md={6} sx={{mt:8}}>
                 <Typography variant='body1'>Register</Typography>
                 {!isLoading && <form onSubmit={ handleLoginSubmit }> 
@@ -81,9 +86,7 @@ const Register = () => {
                 {user.email && <Alert severity="success"> Congratulations Your Register Successfully.</Alert>}
                 {authError && <Alert severity="error">{authError}</Alert>}
             </Grid>
-            <Grid item xs={12} md={6}>
-                 <img src={regImg} style={{width:'90%'}} alt="" />
-            </Grid> 
+            
         </Grid>
     </Container>
     </Box>

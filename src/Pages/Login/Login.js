@@ -38,7 +38,12 @@ const Login = () => {
         <Box>
         <Navigation></Navigation>     
         <Container>
+            <h2 className='text-info text-warning mt-3'>Please Login Here</h2>
             <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                     <img src={loginImg} style={{width:'90%'}} alt="" />
+                </Grid> 
+                {/* ========================== */}
                 <Grid item xs={12} md={6} sx={{mt:8}}>
                     <Typography variant='body1'>Login</Typography>
                     <form onSubmit={ handleLoginSubmit }> 
@@ -61,7 +66,7 @@ const Login = () => {
                         />
                         <Button sx={{width:'75%', my:2}} variant='contained' type='submit'>Submit</Button>
                         <NavLink style={{textDecoration:'none'}} to='/register'>
-                            <Button  variant='text'>New User? Please Register</Button>
+                            <Button  variant='text'>You are New User? Please Register</Button>
                         </NavLink>
                     </form>
                     <p>-------------OR--------------</p>
@@ -71,11 +76,9 @@ const Login = () => {
                     {user.email && <Alert severity="success"> Congratulations Your Register Successfully.</Alert>}
                     {authError && <Alert severity="error">{authError}</Alert>}
                 </Grid>
-                <Grid item xs={12} md={6}>
-                     <img src={loginImg} style={{width:'90%'}} alt="" />
-                </Grid> 
+                
             </Grid>
-        </Container>
+        </Container> 
         </Box>
     );
 };
