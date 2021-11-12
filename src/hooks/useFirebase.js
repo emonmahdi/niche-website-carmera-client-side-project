@@ -1,129 +1,113 @@
-import initializeAuthentication from "../Pages/Login/Firebase/firebase.init"
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, createUserWithEmailAndPassword,signInWithEmailAndPassword, updateProfile  } from "firebase/auth";
-import { useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router";
+import { useEffect, useState } from "react"; 
+import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,GoogleAuthProvider , signInWithPopup, signOut, onAuthStateChanged, updateProfile  } from "firebase/auth";
+import initializeAuthentication from "../Pages/Login/Firebase/firebase.init";
+
 initializeAuthentication();
- 
+
 const useFirebase = () => {
-    const [user, setUser] = useState({});
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
-    const [isLoading, setIsLoading] = useState(true) 
+    const [user, setUser] = useState({})
+    const [isLoading, setIsLoading] = useState(true);
+    const [authError, setAuthError] = useState('');
 
+    const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
-    const auth = getAuth(); 
 
-    const signInUsingGoogle = () => {
+    // user registration
+    const registerUser = (email, password, name, history) => {
+      setIsLoading(true)
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => { 
+          setAuthError('')
+          const newUser = {email, displayName: name}
+          setUser(newUser)
+          // save user to the mongodb
+          saveUser(email, name, 'POST');
+          // send name to firebase after creation
+          updateProfile(auth.currentUser, {
+            displayName:name 
+            }).then(() => { 
+            }).catch((error) => { 
+            });
+          history.replace('/'); 
+          })
+          .catch((error) => { 
+            setAuthError(error.message); 
+          })
+          .finally(() => setIsLoading(false));
+    }
+    // login user &&& private route
+    const loginUser = (email, password, location, history) => {
         setIsLoading(true)
-        signInWithPopup(auth, googleProvider)
-            .then(result => {
-                setUser(result.user)
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => { 
+              // private route redirect 
+              const destination = location?.state?.from || '/';
+              history.replace(destination);
+              setAuthError('');
             })
-            .finally( () => setIsLoading(false)) 
+            .catch((error) => { 
+                setAuthError(error.message);
+            })
+            .finally(() => setIsLoading(false));
+    } 
+    // google login system
+    const signInWithGoogle = (location, history) => {
+      setIsLoading(true)
+      signInWithPopup(auth, googleProvider)
+        .then((result) => {
+          setAuthError('');
+          saveUser(user?.email, user?.displayName, 'PUT'); 
+          const destination = location?.state?.from || '/';
+          history.replace(destination);
+        }).catch((error) => {
+          setAuthError(error.message);
+        }).finally(() => setIsLoading(false));
     }
-    // state change
-   useEffect( () => {
-    const unsubscribed =  onAuthStateChanged(auth, (user) => {
-        if(user){
-            setUser(user)
-        }else{
-            setUser({})
-        } 
-        setIsLoading(false)
-    });
-    return () => unsubscribed;
-   }, [])
 
-    // logOut 
-    const logOut =()=> {
+    // onAuthStateChange obserbe user state
+    useEffect( () => {
+      const unsubcribed =   onAuthStateChanged(auth, (user) => {
+            if (user) { 
+              setUser(user)
+            } else {
+              setUser({})
+            }
+            setIsLoading(false)
+          });
+          return () => unsubcribed;
+    }, [])
+
+    // singOut function
+    const logOut =() => {
         setIsLoading(true)
-        signOut(auth)
-            .then( () => {  })
-            .finally(() => setIsLoading(false))
-
+        signOut(auth).then(() => {
+            // Sign-out successful.
+          }).catch((error) => {
+            // An error happened.
+          })
+         .finally(() => setIsLoading(false));
     }
 
-
-    // email password authentication
-
-    const handleRegistration = (history) => {
-        // e.preventDefault();
-        console.log(email, password);
-        if(password.length < 6){
-            setError('Password must be at least 6 Charecters Long')
-            return;
-        }
-      return  createUserWithEmailAndPassword(auth, email, password,name)
-            // .then(result => {
-            //     const user = result.user 
-            //     const newUser = {email, displayName:name}
-            //     console.log(newUser);
-            //     setUser(newUser)
-            //     // send name to firebase after creation
-
-            //     history.push('/')
-            //     setError('');
-            //     setUserName('');
-            //     reload();
-            // })
-            // .catch(error => {
-            //     setError(error.message);
-            // })
-    }
-
-    // handle signIn 
-
-    const handleLogin = (e) => {
-        console.log(email, password)
-        // e.preventDefault();
-      return  signInWithEmailAndPassword(auth, email, password, name)
-            // .then(result => {
-            //     const user = result.user
-            //     console.log(user) 
-            //     setError('')
-            // })
-            // .catch(error => {
-            //     setError(error.message)
-            // })
-            e.preventDefault();
-    }
-     const reload = () => {
-         window.location.reload();
-     }
-
-    // setName 
-    const setUserName =()=> {
-        updateProfile (auth.currentUser, {displayName : name})
-            .then( () => {})
-    }
-
-    const handleNameChange =(e) => {
-        setName(e.target.value)
-    }
-
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value)
-    }
-
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value)
+    const saveUser = (email, displayName, method) => {
+      const user = {email, displayName};
+      fetch('http://localhost:5000/users', {
+        method:method,
+        headers:{
+          'content-type' : 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+      .then()
     }
 
     return{
-        user, 
-        error,
+        user,
         isLoading,
-        signInUsingGoogle,
-        logOut,
-        handleRegistration,
-        handleEmailChange,
-        handlePasswordChange,
-        handleNameChange,
-        handleLogin,
-        setUserName,
-        reload
+        authError,
+        registerUser,
+        signInWithGoogle,
+        loginUser,
+        logOut
     }
 }
 

@@ -1,55 +1,92 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Alert, Button, Box, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
 import regImg from './register.jpg' 
-import { Link, useHistory,useLocation } from 'react-router-dom'; 
+import { Link, NavLink, useHistory, useLocation} from 'react-router-dom'; 
 import useAuth from '../../../hooks/useAuth';
 import Navigation from '../../Shared/Navigation/Navigation';
 
 const Register = () => {  
-    const {user, error, handleRegistration, handleEmailChange, handlePasswordChange, handleNameChange} = useAuth();
-    console.log(user.password);  
-    const location = useLocation();
-    const history = useHistory();
-    const redirect_uri = location?.state?.from || '/home'
+    const [loginData, setLoginData] = useState({})
+    const {user, authError,registerUser, isLoading} = useAuth();
+    const history = useHistory()
 
-    const handleSubmitReg = (e) => {
-        e.preventDefault()
-        // handleRegistration(user.email, user.password)
+    const handleOnBlur = e => {
+        const field = e.target.name
+        const value = e.target.value 
+        const newLoginData = { ...loginData }
+        newLoginData[field] = value; 
+        setLoginData(newLoginData)
+
+        e.preventDefault() 
     }
 
-    const handleRegistrationOnClick = () =>{
-        handleRegistration()
-        .then(result => {
-            history.push(redirect_uri)
-        })  
+    const handleLoginSubmit = (e) => {
+        if(loginData.password !== loginData.password2){
+            alert('Your Password Did not mach');
+            return;
+        } 
+        registerUser(loginData.email, loginData.password, loginData.name, history)
+        e.preventDefault();
     }
 
-    return (
-        <>
-        <Navigation></Navigation>
-             <div className="container mt-5">
-                <div className="row">
-                <div className="col-lg-6">
-                    <h2>Please Register! </h2>
-                    <form onSubmit={handleSubmitReg} className='shadow px-2 py-4'>
-                        <input onBlur={handleNameChange} type="text" className='form-control w-75 mb-3 mx-auto' placeholder='Your Name'/>
-
-                        <input onBlur={handleEmailChange} type="email" className='form-control w-75 mb-3 mx-auto' placeholder='Your Email' />
-
-                        <input onBlur={handlePasswordChange} type="password" className='form-control w-75 mb-3 mx-auto' placeholder='Your Password' />
-
-                        <button onClick={handleRegistrationOnClick} className='btn btn-danger mb-3'> Register</button><br /> 
-                        <Link to='/login'>Already have an Account!  Please Login</Link>
-                    </form> 
-                        
-                    </div>
-                    <div className="col-lg-6">
-                        <div className="image">
-                            <img src={regImg} className='img-fluid' alt="" />
-                        </div>
-                    </div> 
-                </div>
-            </div>
-        </>
+    return ( 
+        <Box>
+        <Navigation></Navigation>  
+        <Container>
+        <Grid container spacing={2}>
+            <Grid item xs={12} md={6} sx={{mt:8}}>
+                <Typography variant='body1'>Register</Typography>
+                {!isLoading && <form onSubmit={ handleLoginSubmit }> 
+                    <TextField
+                    sx={{width:'75%',mb:2}}
+                    id="filled-password-input"
+                    label="Your Name"
+                    name='name' 
+                    onBlur={handleOnBlur}
+                    variant="standard" 
+                    />
+                    <TextField
+                    sx={{width:'75%',mb:2}}
+                    id="filled-password-input"
+                    label="Your Email"
+                    name='email'
+                    type='email'
+                    onBlur={handleOnBlur}
+                    variant="standard" 
+                    />
+                    <TextField
+                    sx={{width:'75%',mb:2}}
+                    id="filled-password-input"
+                    label="Your Password"
+                    type='password'
+                    name='password'
+                    onBlur={handleOnBlur}
+                    variant="standard" 
+                    />
+                    <TextField
+                    sx={{width:'75%',mb:2}}
+                    id="filled-password-input"
+                    label="Re-Type Your Password"
+                    type='password'
+                    name='password2'
+                    onBlur={handleOnBlur}
+                    variant="standard" 
+                    />
+                    <Button sx={{width:'75%', my:2}} variant='contained' type='submit'>Submit</Button>
+                    <NavLink  style={{textDecoration:'none'}} to='/login'>
+                        <Button  variant='text'>Already Login User? Please Login</Button>
+                    </NavLink>
+                </form>}
+                {isLoading && <CircularProgress />}
+                {user.email && <Alert severity="success"> Congratulations Your Register Successfully.</Alert>}
+                {authError && <Alert severity="error">{authError}</Alert>}
+            </Grid>
+            <Grid item xs={12} md={6}>
+                 <img src={regImg} style={{width:'90%'}} alt="" />
+            </Grid> 
+        </Grid>
+    </Container>
+    </Box>
     );
 };
 

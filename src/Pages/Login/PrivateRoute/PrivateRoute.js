@@ -1,12 +1,12 @@
  
 import React from 'react';
-import { Spinner } from 'react-bootstrap';
+import CircularProgress from '@mui/material/CircularProgress';
 import { Redirect, Route } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 
 const PrivateRoute = ({children, ...rest}) => {
     const {user, isLoading} = useAuth();
-    if(isLoading) { return <Spinner className='text-center' animation="grow" variant="danger" /> }
+    if(isLoading) { return <CircularProgress color="success" /> }
     return (
         <Route
         {...rest}

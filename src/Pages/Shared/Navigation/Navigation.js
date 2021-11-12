@@ -1,33 +1,58 @@
 import React from 'react';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+// import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
 const Navigation = () => {
     const {user, logOut} = useAuth();
     return (
-        <div>
-            <Navbar collapseOnSelect expand="lg" sticky="top" bg="dark" variant="dark">
-                <Container>
-                    <Navbar.Brand href="#home">Smart Camera</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="ms-auto">
-                        <Nav.Link as={Link} to="/home">Home</Nav.Link>
-                        <Nav.Link  to="/home#products">Services</Nav.Link>
-                        <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
-                        {user?.email?
-                             <Button onClick={logOut} variant='light'>Logout</Button>: 
-                             <Nav.Link as={Link} to="/login" className='btn btn-dark text-light'>Login</Nav.Link>}
-                        </Nav>
-                        <Nav>
-                         
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-           </Navbar>
-        </div>
+        <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton 
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Smart Camera
+          </Typography>
+          <Link to='/home' style={{textDecoration:'none', marginRight:'10px'}}>
+              <Button  variant="contained" color="inherit">Home</Button>
+          </Link>
+          <Link to='/manageorders'>
+              <Button variant="contained" color="inherit">Manage Orders</Button>
+          </Link> 
+          {
+            user?.email ?
+            <Box> 
+                <NavLink style={{textDecoration:'none', marginLeft:'10px'}} to='/dashboard'>
+                <Button variant="contained" color="inherit">Dashboard</Button>
+                </NavLink>
+           
+                 <Button onClick={logOut} style={{textDecoration:'none',color:'#000',marginLeft:'10px'}} variant="contained" color="inherit">Log Out</Button>
+            </Box>
+            : 
+            <NavLink style={{textDecoration:'none', marginLeft:'10px'}} to='/login'>
+              <Button variant="contained" color="inherit">Login</Button>
+           </NavLink>
+          }
+          
+          
+        </Toolbar>
+      </AppBar>
+    </Box>
     );
 };
 

@@ -1,6 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'; 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Pages/Home/Home/Home';
 import Login from './Pages/Login/Login';
@@ -8,6 +7,8 @@ import Register from './Pages/Login/Register/Register';
 import AuthProvider from './contexts/AuthProvider';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import ServiceDetails from './Pages/ServiceDetails/ServiceDetails';
+import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
+import MangeOrders from './Pages/Dashboard/MangeOrders/MangeOrders';
 
 function App() {
   return (
@@ -24,11 +25,17 @@ function App() {
             <Route exact path="/login">
                <Login></Login>
             </Route>
+            <Route exact path="/manageorders">
+               <MangeOrders></MangeOrders>
+            </Route>
             <Route exact path="/register">
                 <Register></Register>
             </Route>
             <PrivateRoute path='/product/:Id'>
                 <ServiceDetails></ServiceDetails>
+            </PrivateRoute>
+            <PrivateRoute path='/dashboard'>
+                <Dashboard></Dashboard>
             </PrivateRoute>
           </Switch>
        </Router>
