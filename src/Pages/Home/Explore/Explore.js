@@ -1,0 +1,40 @@
+import React, { useEffect, useState } from 'react';
+import Navigation from '../../Shared/Navigation/Navigation';
+
+const Explore = () => {
+    const [explores, setExplores] = useState([]);
+
+    useEffect( () => {
+        fetch('https://floating-brushlands-69633.herokuapp.com/products')
+            .then(res => res.json())
+            .then(data => setExplores(data))
+    }, [])
+
+    return (
+        <div>
+            <Navigation></Navigation>
+            <div className='bg-light'>
+                 <h2 className='mt-2 fw-bold'>Our Explore Products.</h2>
+                 <div className="container mt-5">
+                     <div className="row">
+                         {
+                             explores.map(product => <div className='col-lg-4 col-md-6 col-sm-12' key={product.id}>
+                                 <div className="single-product rounded-3  mb-4 bg-light shadow">
+                                     <img src={product.img} className='img-fluid w-100' alt="" />
+                                     <div className="content p-3 ">
+                                        <h3 className='text-danger fw-bold'>{product.name}</h3>
+                                        <p>{product.description}</p>
+                                        <h5>Price:{product.price}</h5>
+                                     </div>
+                                 </div>
+                             </div>)
+                         }
+                     </div>
+                 </div>
+            </div>
+            
+        </div>
+    );
+};
+
+export default Explore;

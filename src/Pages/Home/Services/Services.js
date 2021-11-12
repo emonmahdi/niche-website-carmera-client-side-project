@@ -8,7 +8,7 @@ const Services = () => {
     const [products, setProducts] = useState([]);
 
     useEffect( () => {
-        fetch('http://localhost:5000/products')
+        fetch('https://floating-brushlands-69633.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
@@ -21,7 +21,7 @@ const Services = () => {
                 </Typography> 
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     {
-                        products.map(product => <Service
+                        products.slice(0,6).map(product => <Service
                         key={product.id}
                         product ={product}
                         ></Service>)
@@ -29,32 +29,7 @@ const Services = () => {
                 </Grid>
                 </Container>
             </Box>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // <div className='services-section'>
-        //     <h2 className='fw-bold'>CC Camera Products </h2>
-        //     <div className="container">
-        //         <div className="row">
-        //            {
-        //                products.map(product => <Service
-        //                key={product.id}
-        //                 product={product}
-        //                ></Service>)
-        //            }
-        //         </div>
-        //     </div>
-        // </div>
+ 
     );
 };
 

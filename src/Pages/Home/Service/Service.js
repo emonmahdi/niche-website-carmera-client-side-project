@@ -41,7 +41,7 @@ const Service = ({product}) => {
                     Price:{price} 
                     </Typography>
                     <NavLink style={{textDecoration:'none', marginLeft:'10px'}} to={`/product/${id}`}>
-                        <Button sx={{ bgcolor: 'info.main', my:3}} variant="contained">BOOK APPOINTMENT</Button>
+                        <Button sx={{ bgcolor: 'info.main', my:3}} variant="contained">Purches</Button>
                     </NavLink>
                     
                 </CardContent> 

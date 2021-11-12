@@ -9,6 +9,7 @@ import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import ServiceDetails from './Pages/ServiceDetails/ServiceDetails';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 import MangeOrders from './Pages/Dashboard/MangeOrders/MangeOrders';
+import Explore from './Pages/Home/Explore/Explore';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
             </Route> 
             <Route exact path="/register">
                 <Register></Register>
+            </Route>
+            <Route exact path="/explore">
+                 <Explore></Explore>
             </Route>
             <PrivateRoute path='/product/:Id'>
                 <ServiceDetails></ServiceDetails>

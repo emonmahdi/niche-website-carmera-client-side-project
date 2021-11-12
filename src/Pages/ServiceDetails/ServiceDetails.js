@@ -16,7 +16,7 @@ const ServiceDetails = () => {
     console.log(getDetails)
 
     useEffect( () => {
-        fetch('http://localhost:5000/products') 
+        fetch('https://floating-brushlands-69633.herokuapp.com/products') 
             .then(res => res.json())
             .then(data => setSingleDetails(data))
     }, []) 
@@ -37,7 +37,7 @@ const ServiceDetails = () => {
              console.log(data) 
           //    data.status = 'Pending';
              data.getDetails= getDetails;
-          axios.post('http://localhost:5000/myorder', data)
+          axios.post('https://floating-brushlands-69633.herokuapp.com/myorder', data)
               .then(res => {
                   if(res.data.insertedId){
                       alert('Order Booking Confirm');
@@ -51,23 +51,10 @@ const ServiceDetails = () => {
         <Navigation></Navigation>
         <div className='container my-4 pb-5'>
             <div className="row">
-                 <div className="col-lg-7">
-                    <div className="single-details-services text-start">
-                        <div className="title">
-                            <h2 className='fw-bold mb-4'>{getDetails?.name}</h2> 
-                        </div>
-                        <div className="single-details-img  rounded">
-                            <img src={getDetails?.img} className='img-fluid mx-auto rounded-3 shadow' alt="" />
-                        </div> 
-                        <p className='my-4'>{getDetails?.description}</p>
-                        <span className='text-primary fw-bold'>Price: {getDetails?.price}</span> 
-                    </div>
-                </div>
-                {/* ============================= */}
-                <div className="col-lg-5">
+            <div className="col-lg-5">
                 <h3 className='mb-3 fw-bold'>Booking Order Information</h3>
                    
-                    <form onSubmit={handleSubmit(onSubmit) } className='p-3 border'> 
+                    <form onSubmit={handleSubmit(onSubmit) } className='p-3 border bg-light'> 
                         <input type='text' className='form-control mb-2'   {...register("name")} value={user.displayName} placeholder='Name' />
                           
 
@@ -85,6 +72,21 @@ const ServiceDetails = () => {
                         <input className='btn btn-warning' value='Order Booking' type="submit" />
                     </form>
                 </div>
+                {/* ======================================= */}
+                 <div className="col-lg-7 bg-light">
+                    <div className="single-details-services p-3 text-center">
+                        <div className="title">
+                            <h2 className='fw-bold mb-4'>{getDetails?.name}</h2> 
+                        </div>
+                        <div className="single-details-img  rounded">
+                            <img src={getDetails?.img} className='img-fluid mx-auto rounded-3 shadow' alt="" />
+                        </div> 
+                        <p className='my-4'>{getDetails?.description}</p>
+                        <span className='text-primary fw-bold'>Price: {getDetails?.price}</span> 
+                    </div>
+                </div>
+                {/* ============================= */}
+                
             </div>
         </div>
         </>
