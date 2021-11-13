@@ -18,31 +18,51 @@ const verticalAlign = {
 
 const Banner = () => {
     return (
-        <Box  sx={{ flexGrow: 1 }}>
+        <>
+        <div className="banner">
+            <div className="container banner">
+                <div className="row">
+                    <div className="col-lg-6">
+                        <div className="hero-text">
+                            <h1>Your Business Or Security Smile  
+                            Saved Here</h1>
+                            <p className='my-4'> We are provide CC Camera And Your Business  And Any Appertment save our Camera service</p>
+                            <Link to='explore'>
+                                <button className='btn btn-warning'>Get Explore</button> 
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="col-lg-6">
+                        <div className="img">
+                             <img src={banner} alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/* <Box  sx={{ flexGrow: 1 }}>
             <Container >
                 <Grid container spacing={2}>
                 <Grid style={verticalAlign} sx={{textAlign: 'left'}} item xs={12} md={6}>
                    <Box>
                    <Typography style={{ fontWeight:600}} variant='h3'>
-                            Your Business Or Security Smile  
-                            Saved Here
+                            
                     </Typography>
                     <Typography style={{color:'gray', fontWeight:'300'}} variant='p'>
-                            We are provide CC Camera And Your Business  And Any Appertment save our Camera service <br />
+                            <br />
                     </Typography> 
-                    <Link to='explore'>
-                         <Button style={{marginTop: '20px',backgroundColor:'#0BBC96'}} variant="contained">Get Explore</Button>
-                    </Link>
+                    
                     
                    </Box>
                 </Grid>
                 <Grid style={verticalAlign} item xs={12} md={6}>
-                    <img style={{width:'400px'}} src={banner} alt="" />
+                    
                 </Grid>
                 
                 </Grid>
             </Container>
-        </Box>
+        </Box> */}
+        </>
     );
 };
 

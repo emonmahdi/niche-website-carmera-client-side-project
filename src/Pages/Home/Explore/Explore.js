@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navigation from '../../Shared/Navigation/Navigation';
-
-const Explore = () => {
+import { Link } from 'react-router-dom';
+const Explore = () => { 
     const [explores, setExplores] = useState([]);
 
     useEffect( () => {
@@ -16,7 +16,7 @@ const Explore = () => {
             <div className='bg-light'>
                  <h2 className='mt-2 fw-bold'>Our Explore Products.</h2>
                  <div className="container mt-5">
-                     <div className="row">
+                     <div className="row"> 
                          {
                              explores.map(product => <div className='col-lg-4 col-md-6 col-sm-12' key={product.id}>
                                  <div className="single-product rounded-3  mb-4 bg-light shadow">
@@ -24,7 +24,11 @@ const Explore = () => {
                                      <div className="content p-3 ">
                                         <h3 className='text-danger fw-bold'>{product.name}</h3>
                                         <p>{product.description}</p>
-                                        <h5>Price:{product.price}</h5>
+                                        <h5>Price: {product.price}</h5>
+                                        <Link to={`/product/${product.id}`}>
+                                             <button className='btn btn-primary mt-3'>Purches</button>
+                                        </Link>
+                                        
                                      </div>
                                  </div>
                              </div>)

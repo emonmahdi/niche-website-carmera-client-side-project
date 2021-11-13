@@ -1,16 +1,22 @@
-#banner-area{
-    background-color: rgba(161, 116, 138, 0.49);
-    height:90vh;
+ 
+.banner{ 
+    background: black;
+    overflow: hidden; 
+    height: 90vh;
+} 
+.hero-text{
+    color:#fff;
+    text-align: left;
+    margin-top: 150px;
 }
-.hero-area{
-    padding-top: 200px;
+.img{
+    margin-top: 80px;
 }
-.banner-area{
-    
-}
-.banner-img{
-    padding-top: 100px;
-}
-.banner-img img{
-    width: 80%;
+@media screen and (max-width:592px){
+    .banner{  
+        height: auto;
+    } 
+    .img img{
+        width: 60%;
+    }
 }

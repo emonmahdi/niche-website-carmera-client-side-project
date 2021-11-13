@@ -5,7 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import Navigation from '../Shared/Navigation/Navigation';
 
 const ServiceDetails = () => {
-    const {Id} = useParams(); 
+    const {Id} = useParams();  
     const {user} = useAuth();
     // console.log(user);
 

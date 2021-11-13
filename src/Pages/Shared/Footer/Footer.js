@@ -3,36 +3,42 @@ import './Footer.css'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 import { Container, Typography } from '@mui/material';
-
-const footerBg ={
-	backgroundColor:'#000', 
-	padding:'50px 0',
-	color:'#fff'
-}
-
+ 
 const Footer = () => {
     return (
- 
-			<Box style={footerBg} sx={{ flexGrow: 1, py:5 }}>
-			<Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-				<Grid  item xs={2} sm={12} md={4} >
-					<Typography variant='h5'> 
-						Smart Camera
-					</Typography>
-				</Grid>
-				<Grid  item xs={2} sm={12} md={4} >
-					<Typography variant='h5'> 
-						Smart Camera
-					</Typography>
-				</Grid>
-				<Grid  item xs={2} sm={12} md={4} >
-					<Typography variant='h5'> 
-						Smart Camera
-					</Typography>
-				</Grid>
-			</Grid>
-    		</Box> 
+		<>
+		<div className="footer-section">
+			<div className="container">
+			<div className="row">
+				<div className="col-lg-4">
+					<h2 className='logo-text'>
+						<a href="#">Smart Camera</a>
+					</h2>
+					<p>We are provide CC Camera And Your Business  And Any Appertment save our Camera service </p>
+				</div>
+				<div className="col-lg-4">
+					<h2>
+					Our Fetures Link
+					</h2>
+					 <li><a href="#">Standard Camera</a></li>
+					 <li><a href="#">Most Useful Camera</a></li>
+					 <li><a href="#">Security Camera</a></li>
+				</div>
+				<div className="col-lg-4">
+					<h2>
+					Location
+					</h2>
+					 <p>Uttor Badda, Hossen Tower , Dhaka- 1212.</p> 
+				</div>
+			</div>
+			</div>
+		</div>
+		<div className='copy'>
+			<p>&copy; Copyright Smart Camera || Allrights Reserved.</p>
+		</div> 
+		</>	
 
 
 
