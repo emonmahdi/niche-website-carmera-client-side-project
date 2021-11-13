@@ -9,11 +9,25 @@ import MenuIcon from '@mui/icons-material/Menu';
 // import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
+import {makeStyles} from '@mui/styles';
+
+ 
 
 const Navigation = () => {
+  
     const {user, logOut} = useAuth();
+
+    const useStyle = makeStyles({
+      naItem:{
+        color:'#fff',
+        textDecoration:'none'
+      }
+    })
+
+    const {navItem} = useStyle();
     return (
-        <Box sx={{ flexGrow: 1 }}>
+  <>  
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton 
@@ -29,7 +43,7 @@ const Navigation = () => {
             Smart Camera
           </Typography>
           <Link to='/home' style={{textDecoration:'none', marginRight:'10px'}}>
-              <Button  variant="contained" color="inherit">Home</Button>
+              <Button className={navItem}  variant="contained" color="inherit">Home</Button>
           </Link>  
           {
             user?.email ?
@@ -50,6 +64,7 @@ const Navigation = () => {
         </Toolbar>
       </AppBar>
     </Box>
+  </>
     );
 };
 
