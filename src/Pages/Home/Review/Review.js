@@ -29,8 +29,8 @@ const Review = () => {
                                     <img src={avater} className='img-fluid avater' alt="" />
                                 </div>
                                 <div>
-                                    <h5 className='text-primary'>{review.name}</h5> 
-                                    <p>{element}{element} {element} {element} {element}</p>
+                                    <h5 className='text-primary'>{review.name}</h5>  
+                                    <p className='fw-bold '> Rating : {review.review} <span className='text-warning'>  {element}{element} {element} {element} {element}</span></p>
                                 </div>
                             </div>
                             <p>{review.description}</p>

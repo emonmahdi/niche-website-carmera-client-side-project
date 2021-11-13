@@ -30,7 +30,7 @@ const Review = () => {
 
                     <textarea type='text'  className='form-control mb-2' {...register("description", { required: true })} placeholder='description' />  
     
-                    <input type='number' className='form-control mb-2' {...register("review", { required: true })} placeholder='Review Number' /> 
+                    <input type='number' className='form-control mb-2' {...register("review", { required: true })} placeholder='Review Number (0 - 5)' /> 
 
                 {errors.exampleRequired && <span>This field is required</span>}
                 

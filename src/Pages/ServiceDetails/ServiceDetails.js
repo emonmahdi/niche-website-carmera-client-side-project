@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
 import Navigation from '../Shared/Navigation/Navigation';
+import './ServiceDetails.css'
 
 const ServiceDetails = () => {
     const {Id} = useParams();  
@@ -25,11 +26,7 @@ const ServiceDetails = () => {
       const details = singleDetails.find(td => td.id == Id );
       setGetDetails(details);
     }, [singleDetails]);
-
-    useEffect( () => {
-        const details = singleDetails.find(td => td.id == Id );
-        setGetDetails(details);
-      }, [singleDetails]);
+ 
       // ===========================================
       const { register, handleSubmit, reset, formState: { errors } } = useForm();
          const axios = require('axios');

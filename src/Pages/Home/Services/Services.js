@@ -22,7 +22,7 @@ const Services = () => {
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     {
                         products.slice(0,6).map(product => <Service
-                        key={product.id}
+                        key={product._id}
                         product ={product}
                         ></Service>)
                     }

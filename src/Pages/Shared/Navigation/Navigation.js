@@ -30,10 +30,7 @@ const Navigation = () => {
           </Typography>
           <Link to='/home' style={{textDecoration:'none', marginRight:'10px'}}>
               <Button  variant="contained" color="inherit">Home</Button>
-          </Link>
-          <Link to='/manageorders'>
-              <Button variant="contained" color="inherit">Manage Orders</Button>
-          </Link> 
+          </Link>  
           {
             user?.email ?
             <Box> 

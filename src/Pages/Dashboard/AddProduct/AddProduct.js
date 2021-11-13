@@ -20,6 +20,8 @@ const AddProduct = () => {
         <div>
             <h3>Add A Product. </h3>
             <form onSubmit={handleSubmit(onSubmit) } className='p-3 border w-50 mx-auto bg-light'> 
+                <input type='number' className='form-control mb-2'   {...register("id")} placeholder='Your Product Serial Id number' />  
+
                 <input type='text' className='form-control mb-2'   {...register("name")} placeholder='Add Title' />
                     
 

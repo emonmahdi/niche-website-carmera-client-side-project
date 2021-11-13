@@ -31,6 +31,7 @@ import MyOrders from '../MyOrders/MyOrders';
 import Review from '../Review/Review';
 import useAuth from '../../../hooks/useAuth';
 import MangeOrders from '../MangeOrders/MangeOrders';
+import ManageProduct from '../ManageProduct/ManageProduct';
 
 const drawerWidth = 220;
 
@@ -90,6 +91,9 @@ function Dashboard(props) {
         </Link> <br /> <br />
         <Link to={`${url}/managorders`}>
             <Button variant="contained" color="inherit">Manage Orders</Button>
+        </Link> <br /> <br />
+        <Link to={`${url}/managproduct`}>
+            <Button variant="contained" color="inherit">Manage Product</Button>
         </Link> <br /> <br />
       
       </Box>}
@@ -183,6 +187,9 @@ function Dashboard(props) {
         </Route>
         <Route path={`${path}/managorders`}>
           <MangeOrders></MangeOrders>
+        </Route>
+        <Route path={`${path}/managproduct`}>
+           <ManageProduct></ManageProduct>
         </Route>
         <Route path={`${path}/myorder`}>
           <MyOrders></MyOrders>
