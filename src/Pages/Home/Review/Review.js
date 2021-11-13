@@ -11,7 +11,7 @@ const Review = () => {
     const [reviews, setAllReviews] = useState([]);
     console.log(reviews)
     useEffect( () => {
-        fetch('http://localhost:5000/review')
+        fetch('https://floating-brushlands-69633.herokuapp.com/review')
         .then(res => res.json())
         .then(data => setAllReviews(data));
     }, []);
