@@ -36,7 +36,7 @@ const Contact = () => {
 
                 {errors.exampleRequired && <span>This field is required</span>}
                 
-                <input value="Add Product" className='btn btn-danger' type="submit" />
+                <input value="Contact" className='btn btn-danger' type="submit" />
             </form>
                     </div>
                 </div>
