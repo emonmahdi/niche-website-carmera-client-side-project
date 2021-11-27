@@ -13,4 +13,4 @@ This Project Live Server Link [ Hotel Grand Park ] https://floating-brushlands-6
 * Login Admin users can Add Products to that website.
 * Users can book by your choice order and remove an order from their order cart our services.
 * User And Admin view separate Dashboard.
-* This project uses technology- Bootstrap, Material UI React, MongoDB, Nodejs, Firebase, etc.
+* This project uses technology- Bootstrap, Material UI, React, MongoDB, Nodejs, Firebase, etc.
