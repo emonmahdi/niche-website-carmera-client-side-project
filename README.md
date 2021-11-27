@@ -8,9 +8,9 @@ This Project Live Server Link [ Hotel Grand Park ] https://floating-brushlands-6
 
 ## Purpose Of My Website
 
-* This is a Smart And Most Security Support Website.
-* Our Services are very high comfortable all categories people.
-* Our Camera is an International Quality 
-* We have Most Security and Saves your Proirity.
-* Our  Camera is so famous in this Country.
-* Our Support are always free on First time Setup.
+* This is a Smart And Most Security CC Camera Support Website.
+* This website Login And Registration Authentication Features Provide.
+* Login Admin users can Add Products to that website.
+* Users can book by your choice order and remove an order from their order cart our services.
+* User And Admin view separate Dashboard.
+* This project uses technology- Bootstrap, Material UI React, MongoDB, Nodejs, Firebase, etc.
